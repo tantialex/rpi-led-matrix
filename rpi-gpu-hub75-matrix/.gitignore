@@ -1,0 +1,3 @@
+*.so
+artnet_receiver
+build/
