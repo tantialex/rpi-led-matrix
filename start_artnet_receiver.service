@@ -1,0 +1,14 @@
+[Unit]
+Description=ArtNet Receiver
+After=multi-user.target
+
+[Service]
+ExecStart=/home/alex/start_artnet_receiver.sh
+WorkingDirectory=/home/alex
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=alex
+
+[Install]
+WantedBy=multi-user.target
