@@ -1,11 +1,14 @@
 // gcc -O3 -Wall -lrpihub75_gpu example.c -o example
 
+#define _GNU_SOURCE  // for pthread_setname_np
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <pthread.h>
+#include <stdatomic.h>  // for atomic_size_t
+#include <stdbool.h>    // for bool
 #include <rpihub75/rpihub75.h>
 #include <rpihub75/util.h>
 #include <rpihub75/gpu.h>
@@ -16,12 +19,10 @@
 #define MAX_PACKET_SIZE 530
 #define MAX_DMX_CHANNELS 510
 
-// The structure that will hold the scene info
 scene_info *scene = NULL;
 uint8_t *dmxData = NULL;
-bool *change = true;
+bool change = true;  // ✅ changed from pointer to plain bool
 
-// Atomic counter to track the total packets received
 atomic_size_t total_packets_received = 0;
 
 // Function to handle incoming Art-Net packets
@@ -47,7 +48,6 @@ void ProcessArtNetPacket(const uint8_t *buffer, ssize_t length)
         return;
     }
 
-    uint16_t sequence = buffer[12];
     // Sequence number, physical port, universe, and data length
     uint16_t universe = buffer[14] | (buffer[15] << 8);
 
