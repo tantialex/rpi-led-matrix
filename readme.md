@@ -14,7 +14,9 @@ make DEF="-DHZELLER=1"
 
 sudo make install
 
-gcc artnet_receiver.c  -Wall -O3 -lrpihub75 -o artnet_receiver
+gcc -O3 -Wall artnet_receiver.c -L. -lrpihub75_gpu -lrpihub75 -o artnet_receiver
+
+mv artnet_receiver ~/
 
 sudo chmod +x ./start_artnet_receiver.sh
 sudo cp start_artnet_receiver.service /etc/systemd/system/start_artnet_receiver.service
