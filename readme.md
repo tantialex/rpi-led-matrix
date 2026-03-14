@@ -25,3 +25,10 @@ sudo systemctl enable start_artnet_receiver.service
 sudo systemctl start start_artnet_receiver.service
 sudo systemctl status start_artnet_receiver.service
 ```
+
+Camera
+
+```
+https://github.com/bluenviron/mediamtx/issues/2581
+https://mediamtx.org/docs/publish/raspberry-pi-cameras
+```
